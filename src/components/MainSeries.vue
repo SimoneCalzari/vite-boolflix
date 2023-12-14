@@ -14,11 +14,7 @@ export default {
 </script>
 
 <template>
-  <h2>Movies</h2>
-  <MainCard
-    v-for="movie in store.movies"
-    :objContent="movie"
-    isObjWhat="film"
-  />
-  <p v-show="store.movies.length < 1">No results found in movies</p>
+  <h2>Tv Series</h2>
+  <MainCard v-for="serie in store.series" :objContent="serie" isObjWhat="tv" />
+  <p v-show="store.series.length < 1">No results found in series</p>
 </template>

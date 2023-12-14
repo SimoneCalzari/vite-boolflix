@@ -12,9 +12,11 @@ export default {
     };
   },
   created() {
-    axios.get(this.store.urlStart).then((response) => {
+    axios.get(this.store.urlStartMovies).then((response) => {
       this.store.movies = response.data.results;
-      console.log(this.store.movies);
+    });
+    axios.get(this.store.urlStartSeries).then((response) => {
+      this.store.series = response.data.results;
     });
   },
   methods: {
@@ -28,6 +30,15 @@ export default {
           })
           .then((response) => {
             this.store.movies = response.data.results;
+          });
+        axios
+          .get(this.store.urlSeries, {
+            params: {
+              query: this.store.searchTxt,
+            },
+          })
+          .then((response) => {
+            this.store.series = response.data.results;
           });
       }
       this.store.searchTxt = "";
