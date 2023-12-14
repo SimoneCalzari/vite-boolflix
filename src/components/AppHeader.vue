@@ -12,34 +12,26 @@ export default {
     };
   },
   created() {
-    axios.get(this.store.urlStartMovies).then((response) => {
-      this.store.movies = response.data.results;
-    });
-    axios.get(this.store.urlStartSeries).then((response) => {
-      this.store.series = response.data.results;
-    });
+    // variabili per migliorare leggibilità codice
+    const urlMovies = this.store.urlStartMovies;
+    const urlSeries = this.store.urlStartSeries;
+    this.callApi(urlMovies, "movies");
+    this.callApi(urlSeries, "series");
   },
   methods: {
+    callApi(url, key) {
+      axios.get(url).then((response) => {
+        this.store[key] = response.data.results;
+      });
+    },
     goSearch() {
-      if (this.store.searchTxt.trim().length > 0) {
-        axios
-          .get(this.store.urlMovies, {
-            params: {
-              query: this.store.searchTxt,
-            },
-          })
-          .then((response) => {
-            this.store.movies = response.data.results;
-          });
-        axios
-          .get(this.store.urlSeries, {
-            params: {
-              query: this.store.searchTxt,
-            },
-          })
-          .then((response) => {
-            this.store.series = response.data.results;
-          });
+      //variabili per migliorare leggibilità codice
+      const searchInput = this.store.searchTxt;
+      const urlMovies = this.store.urlMovies + "&query=" + searchInput;
+      const urlSeries = this.store.urlMovies + "&query=" + searchInput;
+      if (searchInput.trim().length > 0) {
+        this.callApi(urlMovies, "movies");
+        this.callApi(urlSeries, "series");
       }
       this.store.searchTxt = "";
     },
