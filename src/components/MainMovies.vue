@@ -15,4 +15,5 @@ export default {
 
 <template>
   <MainCard v-for="movie in store.movies" :objContent="movie" />
+  <p v-show="store.movies.length < 1">No results found</p>
 </template>

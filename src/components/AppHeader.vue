@@ -6,7 +6,6 @@ export default {
   components: {
     HeaderSearcher,
   },
-  props: {},
   data() {
     return {
       store,
@@ -18,12 +17,28 @@ export default {
       console.log(this.store.movies);
     });
   },
+  methods: {
+    goSearch() {
+      if (this.store.searchTxt.trim().length > 0) {
+        axios
+          .get(this.store.urlMovies, {
+            params: {
+              query: this.store.searchTxt,
+            },
+          })
+          .then((response) => {
+            this.store.movies = response.data.results;
+          });
+      }
+      this.store.searchTxt = "";
+    },
+  },
 };
 </script>
 
 <template>
   <header>
-    <HeaderSearcher />
+    <HeaderSearcher @search="goSearch" />
   </header>
 </template>
 

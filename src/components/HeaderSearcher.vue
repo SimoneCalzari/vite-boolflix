@@ -10,6 +10,6 @@ export default {
 </script>
 
 <template>
-  <input type="text" />
-  <button>Cerca</button>
+  <input type="text" v-model="store.searchTxt" />
+  <button @click="$emit('search')">Cerca</button>
 </template>
