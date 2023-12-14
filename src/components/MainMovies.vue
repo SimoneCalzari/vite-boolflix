@@ -22,3 +22,9 @@ export default {
   />
   <p v-show="store.movies.length < 1">No results found in movies</p>
 </template>
+
+<style scoped>
+h2 {
+  font-size: 50px;
+}
+</style>

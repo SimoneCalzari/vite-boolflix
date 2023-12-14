@@ -18,3 +18,9 @@ export default {
   <MainCard v-for="serie in store.series" :objContent="serie" isObjWhat="tv" />
   <p v-show="store.series.length < 1">No results found in series</p>
 </template>
+
+<style scoped>
+h2 {
+  font-size: 50px;
+}
+</style>
