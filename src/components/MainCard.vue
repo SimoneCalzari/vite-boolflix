@@ -53,7 +53,10 @@ export default {
 <template>
   <ul>
     <li>
-      <img :src="pathPartOne + objContent.poster_path" alt="" />
+      <img
+        :src="pathPartOne + objContent.poster_path"
+        :alt="`${seriesOrMovie1()}`"
+      />
     </li>
     <li>{{ seriesOrMovie1() }}</li>
     <li>{{ seriesOrMovie2() }}</li>

@@ -1,6 +1,7 @@
 <script>
 import { store } from "../store.js";
 export default {
+  emits: ["search"],
   data() {
     return {
       store,
