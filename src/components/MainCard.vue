@@ -22,6 +22,18 @@ export default {
       }
       return this.objContent.original_name;
     },
+    langFlags() {
+      if (this.objContent.original_language === "en") {
+        return "us";
+      }
+      if (this.objContent.original_language === "ja") {
+        return "jp";
+      }
+      if (this.objContent.original_language === "ko") {
+        return "kr";
+      }
+      return this.objContent.original_language;
+    },
     countStars() {
       if (this.objContent.vote_average < 2) {
         return 1;
@@ -47,16 +59,16 @@ export default {
     <li>{{ seriesOrMovie2() }}</li>
     <li>
       {{ objContent.original_language }}
-      <!-- <span
-        :class="`fi fi-${objContent.origin_country[0].toLowerCase()}`"
-        v-if="isObjWhat !== 'movie'"
-      ></span> -->
+    </li>
+    <li>
+      <span :class="`fi fi-${langFlags()}`"></span>
     </li>
     <li>{{ objContent.vote_average }}</li>
     <li>
       <i class="fa-solid fa-star" v-for="n in countStars()"></i>
       <i class="fa-regular fa-star" v-for="n in 5 - countStars()"></i>
     </li>
+    <li>{{ objContent.overview }}</li>
   </ul>
 </template>
 
