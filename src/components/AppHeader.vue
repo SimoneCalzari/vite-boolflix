@@ -12,6 +12,12 @@ export default {
       store,
     };
   },
+  created() {
+    axios.get(this.store.urlStart).then((response) => {
+      this.store.movies = response.data.results;
+      console.log(this.store.movies);
+    });
+  },
 };
 </script>
 
@@ -20,3 +26,9 @@ export default {
     <HeaderSearcher />
   </header>
 </template>
+
+<style scoped>
+header {
+  padding: 30px;
+}
+</style>

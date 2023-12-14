@@ -14,5 +14,5 @@ export default {
 </script>
 
 <template>
-  <MainCard />
+  <MainCard v-for="movie in store.movies" :objContent="movie" />
 </template>

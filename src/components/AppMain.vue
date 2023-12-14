@@ -12,3 +12,9 @@ export default {
     <MainMovies />
   </main>
 </template>
+
+<style scoped>
+main {
+  padding: 30px;
+}
+</style>
