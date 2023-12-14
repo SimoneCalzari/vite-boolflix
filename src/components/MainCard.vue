@@ -1,5 +1,10 @@
 <script>
 export default {
+  data() {
+    return {
+      pathPartOne: "https://image.tmdb.org/t/p/w342",
+    };
+  },
   props: {
     objContent: Object,
     isObjWhat: String,
@@ -23,6 +28,9 @@ export default {
 
 <template>
   <ul>
+    <li>
+      <img :src="pathPartOne + objContent.poster_path" alt="" />
+    </li>
     <li>{{ seriesOrMovie1() }}</li>
     <li>{{ seriesOrMovie2() }}</li>
     <li>{{ objContent.original_language }}</li>
