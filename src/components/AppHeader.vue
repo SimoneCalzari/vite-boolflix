@@ -40,9 +40,11 @@ export default {
 </script>
 
 <template>
-  <header class="flex">
-    <h1 class="upper">Boolflix</h1>
-    <HeaderSearcher @search="goSearch" />
+  <header>
+    <div class="container flex box-header">
+      <h1 class="upper">Boolflix</h1>
+      <HeaderSearcher @search="goSearch" />
+    </div>
   </header>
 </template>
 
@@ -50,11 +52,14 @@ export default {
 @use "../assets/scss/partials/variables" as *;
 header {
   background-color: $header-bkg;
-  justify-content: space-between;
-  padding: 15px 25px;
-  h1 {
-    color: $page-title;
-    font-size: 40px;
+  .box-header {
+    justify-content: space-between;
+    padding: 15px 0;
+    h1 {
+      color: $page-title;
+      font-size: 40px;
+      letter-spacing: 2px;
+    }
   }
 }
 </style>

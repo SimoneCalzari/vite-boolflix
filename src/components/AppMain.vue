@@ -11,13 +11,31 @@ export default {
 
 <template>
   <main>
-    <MainMovies />
-    <MainSeries />
+    <div class="container">
+      <section>
+        <h2>Movies</h2>
+        <MainMovies />
+      </section>
+      <section>
+        <h2>TV Shows</h2>
+        <MainSeries />
+      </section>
+    </div>
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use "../assets/scss/partials/variables" as *;
 main {
-  padding: 30px;
+  background-color: $main-bkg;
+  section {
+    padding: 20px 0;
+    h2 {
+      color: white;
+      font-size: 30px;
+      margin-bottom: 20px;
+      letter-spacing: 3px;
+    }
+  }
 }
 </style>
