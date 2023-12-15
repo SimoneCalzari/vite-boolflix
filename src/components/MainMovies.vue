@@ -17,8 +17,12 @@ export default {
   <h2>Movies</h2>
   <MainCard
     v-for="movie in store.movies"
-    :objContent="movie"
-    isObjWhat="film"
+    :title="movie.title"
+    :titleOriginal="movie.original_title"
+    :lang="movie.original_language"
+    :vote="movie.vote_average"
+    :overview="movie.overview"
+    :imgPath="movie.poster_path"
   />
   <p v-show="store.movies.length < 1">No results found in movies</p>
 </template>

@@ -40,13 +40,21 @@ export default {
 </script>
 
 <template>
-  <header>
+  <header class="flex">
+    <h1 class="upper">Boolflix</h1>
     <HeaderSearcher @search="goSearch" />
   </header>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+@use "../assets/scss/partials/variables" as *;
 header {
-  padding: 30px;
+  background-color: $header-bkg;
+  justify-content: space-between;
+  padding: 15px 25px;
+  h1 {
+    color: $page-title;
+    font-size: 40px;
+  }
 }
 </style>

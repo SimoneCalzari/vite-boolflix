@@ -6,38 +6,28 @@ export default {
     };
   },
   props: {
-    objContent: Object,
-    isObjWhat: String,
-  },
-  methods: {
-    seriesOrMovie1() {
-      if (this.isObjWhat === "film") {
-        return this.objContent.title;
-      }
-      return this.objContent.name;
-    },
-    seriesOrMovie2() {
-      if (this.isObjWhat === "film") {
-        return this.objContent.original_title;
-      }
-      return this.objContent.original_name;
-    },
-    langFlags() {
-      if (this.objContent.original_language === "en") {
-        return "us";
-      }
-      if (this.objContent.original_language === "ja") {
-        return "jp";
-      }
-      if (this.objContent.original_language === "ko") {
-        return "kr";
-      }
-      return this.objContent.original_language;
-    },
+    title: String,
+    titleOriginal: String,
+    lang: String,
+    vote: Number,
+    overview: String,
+    imgPath: String,
   },
   computed: {
     countStars() {
-      return Math.ceil(this.objContent.vote_average / 2);
+      return Math.ceil(this.vote / 2);
+    },
+    langFlags() {
+      if (this.lang === "en") {
+        return "us";
+      }
+      if (this.lang === "ja") {
+        return "jp";
+      }
+      if (this.lang === "ko") {
+        return "kr";
+      }
+      return this.lang;
     },
   },
 };
@@ -46,28 +36,19 @@ export default {
 <template>
   <ul>
     <li>
-      <img
-        :src="pathPartOne + objContent.poster_path"
-        :alt="`${seriesOrMovie1()}`"
-      />
+      <img :src="pathPartOne + imgPath" :alt="title" />
     </li>
-    <li>{{ seriesOrMovie1() }}</li>
-    <li>{{ seriesOrMovie2() }}</li>
-    <li>
-      {{ objContent.original_language }}
-    </li>
-    <li>
-      <span :class="`fi fi-${langFlags()}`"></span>
-    </li>
-    <li>{{ objContent.vote_average }}</li>
+    <li>{{ title }}</li>
+    <li>{{ titleOriginal }}</li>
+    <li>{{ lang }} <span :class="`fi fi-${langFlags}`"></span></li>
     <li class="stars">
       <font-awesome-icon icon="fa-solid fa-star" v-for="n in countStars" />
       <font-awesome-icon
         icon="fa-regular fa-star"
         v-for="n in 5 - countStars"
-      />
+      ></font-awesome-icon>
     </li>
-    <li>{{ objContent.overview }}</li>
+    <li>{{ overview }}</li>
   </ul>
 </template>
 
