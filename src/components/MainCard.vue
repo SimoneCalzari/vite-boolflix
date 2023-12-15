@@ -35,16 +35,11 @@ export default {
       return this.objContent.original_language;
     },
     countStars() {
-      if (this.objContent.vote_average < 2) {
-        return 1;
-      } else if (this.objContent.vote_average < 4) {
-        return 2;
-      } else if (this.objContent.vote_average < 6) {
-        return 3;
-      } else if (this.objContent.vote_average < 8) {
-        return 4;
+      for (let i = 1; i < 6; i++) {
+        if (this.objContent.vote_average <= 2 * i) {
+          return i;
+        }
       }
-      return 5;
     },
   },
 };
