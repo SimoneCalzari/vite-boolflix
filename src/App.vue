@@ -10,6 +10,15 @@ export default {
 </script>
 
 <template>
-  <AppHeader />
-  <AppMain />
+  <div class="flex pseudo-body">
+    <AppHeader />
+    <AppMain />
+  </div>
 </template>
+
+<style scoped>
+.pseudo-body {
+  height: 100vh;
+  flex-direction: column;
+}
+</style>

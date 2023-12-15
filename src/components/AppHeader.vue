@@ -43,7 +43,7 @@ export default {
   <header>
     <div class="container flex box-header">
       <h1 class="upper">Boolflix</h1>
-      <HeaderSearcher @search="goSearch" />
+      <HeaderSearcher @search="goSearch" @search2="goSearch" />
     </div>
   </header>
 </template>

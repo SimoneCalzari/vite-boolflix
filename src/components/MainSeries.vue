@@ -33,6 +33,10 @@ export default {
 @use "../assets/scss/partials/variables" as *;
 .series {
   flex-wrap: wrap;
-  @include gap($main-grid-gap);
+  @include gap(10px);
+}
+p {
+  color: white;
+  font-size: 18px;
 }
 </style>

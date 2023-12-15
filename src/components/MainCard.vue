@@ -45,17 +45,28 @@ export default {
       <img :src="pathPartOne + imgPath" :alt="title" />
     </div>
     <div class="content-box" :class="{ none: !contentVisible }">
-      <div>{{ title }}</div>
-      <div>{{ titleOriginal }}</div>
-      <div>{{ lang }} <span :class="`fi fi-${langFlags}`"></span></div>
-      <div class="stars">
-        <font-awesome-icon icon="fa-solidd fa-star" v-for="n in countStars" />
+      <h4><span>Title: </span>{{ title }}</h4>
+      <h4 v-show="title !== titleOriginal">
+        <span>Original Title: </span>{{ titleOriginal }}
+      </h4>
+      <div>
+        <span>Original Language: </span>{{ lang }}
+        <span :class="`fi fi-${langFlags}`"></span>
+      </div>
+      <div v-show="vote > 0">
+        <span>Vote: </span>
+        <font-awesome-icon
+          icon="fa-solidd fa-star"
+          v-for="n in countStars"
+          class="star"
+        />
         <font-awesome-icon
           icon="fa-regular fa-star"
           v-for="n in 5 - countStars"
-        ></font-awesome-icon>
+          class="star"
+        />
       </div>
-      <div>{{ overview }}</div>
+      <p v-show="overview.length > 0"><span>Overview: </span>{{ overview }}</p>
     </div>
   </article>
 </template>
@@ -63,16 +74,58 @@ export default {
 <style scoped lang="scss">
 @use "../assets/scss/partials/mixins" as *;
 @use "../assets/scss/partials/variables" as *;
+
 article {
-  @include grid($cards-per-row, $main-grid-gap);
+  @include grid(6, 10px);
+  border: 1px solid white;
+  letter-spacing: 1px;
+  margin-bottom: 30px;
   .img-box {
     img {
       width: 100%;
       display: block;
     }
   }
+  h4 {
+    font-weight: lighter;
+  }
   .content-box {
     color: white;
+    padding: 15px;
+    & > * {
+      margin-bottom: 7px;
+    }
+    span {
+      font-weight: bold;
+    }
+    .star {
+      color: gold;
+    }
+  }
+}
+
+// responsive
+@media screen and (max-width: 1200px) {
+  article {
+    @include grid(5, 10px);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  article {
+    @include grid(4, 10px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  article {
+    @include grid(3, 10px);
+  }
+}
+
+@media screen and (max-width: 576px) {
+  article {
+    @include grid(2, 10px);
   }
 }
 </style>

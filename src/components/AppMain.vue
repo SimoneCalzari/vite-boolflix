@@ -28,6 +28,8 @@ export default {
 @use "../assets/scss/partials/variables" as *;
 main {
   background-color: $main-bkg;
+  flex-grow: 1;
+  overflow: auto;
   section {
     padding: 20px 0;
     h2 {

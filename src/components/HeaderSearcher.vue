@@ -1,7 +1,7 @@
 <script>
 import { store } from "../store.js";
 export default {
-  emits: ["search"],
+  emits: ["search", "search2"],
   data() {
     return {
       store,
@@ -18,6 +18,7 @@ export default {
       v-model="store.searchTxt"
       id="search"
       placeholder="Search Movies, TV Shows ..."
+      @keyup.enter="$emit('search2')"
     />
     <button @click="$emit('search')" id="search-btn">Search</button>
   </div>
