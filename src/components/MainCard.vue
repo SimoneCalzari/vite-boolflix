@@ -34,12 +34,10 @@ export default {
       }
       return this.objContent.original_language;
     },
+  },
+  computed: {
     countStars() {
-      for (let i = 1; i < 6; i++) {
-        if (this.objContent.vote_average <= 2 * i) {
-          return i;
-        }
-      }
+      return Math.ceil(this.objContent.vote_average / 2);
     },
   },
 };
@@ -62,9 +60,12 @@ export default {
       <span :class="`fi fi-${langFlags()}`"></span>
     </li>
     <li>{{ objContent.vote_average }}</li>
-    <li>
-      <i class="fa-solid fa-star" v-for="n in countStars()"></i>
-      <i class="fa-regular fa-star" v-for="n in 5 - countStars()"></i>
+    <li class="stars">
+      <font-awesome-icon icon="fa-solid fa-star" v-for="n in countStars" />
+      <font-awesome-icon
+        icon="fa-regular fa-star"
+        v-for="n in 5 - countStars"
+      />
     </li>
     <li>{{ objContent.overview }}</li>
   </ul>
@@ -74,8 +75,7 @@ export default {
 ul {
   margin-bottom: 20px;
 }
-
-i {
+.stars {
   color: gold;
   font-size: 20px;
 }
