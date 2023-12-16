@@ -42,7 +42,7 @@ export default {
 <template>
   <article @mouseenter="showContent" @mouseleave="showContent">
     <div class="img-box" :class="{ none: contentVisible }">
-      <img :src="pathPartOne + imgPath" :alt="title" />
+      <img :src="pathPartOne + imgPath" alt="Image Not Available" />
     </div>
     <div class="content-box" :class="{ none: !contentVisible }">
       <h4><span>Title: </span>{{ title }}</h4>
@@ -76,22 +76,31 @@ export default {
 @use "../assets/scss/partials/variables" as *;
 
 article {
-  @include grid(6, 10px);
+  @include grid(5, 10px);
   border: 1px solid white;
   letter-spacing: 1px;
   margin-bottom: 30px;
+  height: 350px;
   .img-box {
+    height: 100%;
     img {
       width: 100%;
       display: block;
+      height: 100%;
+      color: white;
+      font-size: 20px;
     }
   }
   h4 {
     font-weight: lighter;
+    font-size: 14px;
   }
   .content-box {
     color: white;
     padding: 15px;
+    font-size: 13px;
+    height: 100%;
+    overflow: auto;
     & > * {
       margin-bottom: 7px;
     }
@@ -107,25 +116,25 @@ article {
 // responsive
 @media screen and (max-width: 1200px) {
   article {
-    @include grid(5, 10px);
+    @include grid(4, 10px);
   }
 }
 
 @media screen and (max-width: 992px) {
   article {
-    @include grid(4, 10px);
+    @include grid(3, 10px);
   }
 }
 
 @media screen and (max-width: 768px) {
   article {
-    @include grid(3, 10px);
+    @include grid(2, 10px);
   }
 }
 
 @media screen and (max-width: 576px) {
   article {
-    @include grid(2, 10px);
+    @include grid(1, 10px);
   }
 }
 </style>

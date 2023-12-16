@@ -56,4 +56,12 @@ export default {
     }
   }
 }
+@media screen and (max-width: 768px) {
+  .search-container #search-btn {
+    display: none;
+  }
+  label {
+    display: none;
+  }
+}
 </style>
