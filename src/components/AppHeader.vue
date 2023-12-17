@@ -29,7 +29,7 @@ export default {
       //variabili per migliorare leggibilità codice
       const searchInput = this.store.searchTxt;
       const urlMovies = this.store.urlMovies + "&query=" + searchInput;
-      const urlSeries = this.store.urlMovies + "&query=" + searchInput;
+      const urlSeries = this.store.urlSeries + "&query=" + searchInput;
       if (searchInput.trim().length > 0) {
         this.callApi(urlMovies, "movies", "results");
         this.callApi(urlSeries, "series", "results");

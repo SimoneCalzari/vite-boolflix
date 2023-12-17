@@ -24,6 +24,8 @@ export default {
       :overview="serie.overview"
       :imgPath="serie.poster_path"
       :genresList="serie.genre_ids"
+      :identifier="serie.id"
+      isWhat="serie"
     />
   </div>
   <p v-show="store.series.length < 1">No results found in series</p>

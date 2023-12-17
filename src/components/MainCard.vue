@@ -8,6 +8,7 @@ export default {
       contentVisible: false,
       // array per ottenere i nomi dei generi
       cardGenres: [],
+      castActors: [],
       store,
     };
   },
@@ -21,6 +22,8 @@ export default {
     imgPath: String,
     // array con id generi
     genresList: Array,
+    identifier: Number,
+    isWhat: String,
   },
   methods: {
     showContent() {
@@ -29,12 +32,42 @@ export default {
   },
   computed: {
     getGenres() {
+      this.cardGenres = [];
       this.store.genres.forEach((genreObj) => {
         if (this.genresList.includes(genreObj.id)) {
           this.cardGenres.push(genreObj.name);
         }
       });
       return this.cardGenres.join(", ");
+    },
+    getCast() {
+      // decido se avere come query movie o tv a seconda di cosa rappresenterà la mia card
+      let queryMovieSerie = "movie";
+      if (this.isWhat !== "movie") {
+        queryMovieSerie = "tv";
+      }
+      // compo l url per la chiamta api
+      const urlCast =
+        this.store.urlBasic +
+        `/${queryMovieSerie}/` +
+        `${this.identifier}/` +
+        "credits?api_key=" +
+        this.store.apiKey;
+      axios.get(urlCast).then((response) => {
+        // salvo la risposta dell api in una proprietà del mio componente
+        this.castActors = response.data.cast;
+      });
+      // inizializzo un array vuoto dove salverò solo i nomi degli attori
+      const actorNames = [];
+      this.castActors.forEach((actor) => {
+        actorNames.push(actor.name);
+      });
+      // se ho più di 5 attori vorrò solo primi 5
+      if (actorNames.length > 5) {
+        actorNames.splice(5);
+      }
+      // restituisco i nomi degli attori come stringa separati da una virgola e spazio
+      return actorNames.join(", ");
     },
 
     countStars() {
@@ -83,7 +116,10 @@ export default {
           class="star"
         />
       </div>
-      <div><span>Genres:</span> {{ getGenres }}</div>
+      <div v-show="cardGenres.length > 0">
+        <span>Genres:</span> {{ getGenres }}
+      </div>
+      <div v-show="castActors.length > 0"><span>Cast:</span> {{ getCast }}</div>
       <p v-show="overview.length > 0"><span>Overview: </span>{{ overview }}</p>
     </div>
   </article>
