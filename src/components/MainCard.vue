@@ -1,11 +1,17 @@
 <script>
+import { store } from "../store.js";
+import axios from "axios";
 export default {
   data() {
     return {
       pathPartOne: "https://image.tmdb.org/t/p/w342",
       contentVisible: false,
+      // array per ottenere i nomi dei generi
+      cardGenres: [],
+      store,
     };
   },
+  created() {},
   props: {
     title: String,
     titleOriginal: String,
@@ -13,6 +19,8 @@ export default {
     vote: Number,
     overview: String,
     imgPath: String,
+    // array con id generi
+    genresList: Array,
   },
   methods: {
     showContent() {
@@ -20,6 +28,15 @@ export default {
     },
   },
   computed: {
+    getGenres() {
+      this.store.genres.forEach((genreObj) => {
+        if (this.genresList.includes(genreObj.id)) {
+          this.cardGenres.push(genreObj.name);
+        }
+      });
+      return this.cardGenres.join(", ");
+    },
+
     countStars() {
       return Math.ceil(this.vote / 2);
     },
@@ -66,6 +83,7 @@ export default {
           class="star"
         />
       </div>
+      <div><span>Genres:</span> {{ getGenres }}</div>
       <p v-show="overview.length > 0"><span>Overview: </span>{{ overview }}</p>
     </div>
   </article>

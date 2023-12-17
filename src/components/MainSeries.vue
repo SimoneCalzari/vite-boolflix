@@ -23,6 +23,7 @@ export default {
       :vote="serie.vote_average"
       :overview="serie.overview"
       :imgPath="serie.poster_path"
+      :genresList="serie.genre_ids"
     />
   </div>
   <p v-show="store.series.length < 1">No results found in series</p>

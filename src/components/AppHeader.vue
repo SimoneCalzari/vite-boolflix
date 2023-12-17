@@ -15,13 +15,14 @@ export default {
     // variabili per migliorare leggibilità codice
     const urlMovies = this.store.urlStartMovies;
     const urlSeries = this.store.urlStartSeries;
-    this.callApi(urlMovies, "movies");
-    this.callApi(urlSeries, "series");
+    this.callApi(urlMovies, "movies", "results");
+    this.callApi(urlSeries, "series", "results");
+    this.callApi(this.store.urlGenres, "genres", "genres");
   },
   methods: {
-    callApi(url, key) {
+    callApi(url, keyStore, keyResults) {
       axios.get(url).then((response) => {
-        this.store[key] = response.data.results;
+        this.store[keyStore] = response.data[keyResults];
       });
     },
     goSearch() {
@@ -30,8 +31,8 @@ export default {
       const urlMovies = this.store.urlMovies + "&query=" + searchInput;
       const urlSeries = this.store.urlMovies + "&query=" + searchInput;
       if (searchInput.trim().length > 0) {
-        this.callApi(urlMovies, "movies");
-        this.callApi(urlSeries, "series");
+        this.callApi(urlMovies, "movies", "results");
+        this.callApi(urlSeries, "series", "results");
       }
       this.store.searchTxt = "";
     },

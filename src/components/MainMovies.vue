@@ -23,6 +23,7 @@ export default {
       :vote="movie.vote_average"
       :overview="movie.overview"
       :imgPath="movie.poster_path"
+      :genresList="movie.genre_ids"
     />
   </div>
   <p v-show="store.movies.length < 1">No results found in movies</p>
