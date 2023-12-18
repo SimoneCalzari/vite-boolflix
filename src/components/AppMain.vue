@@ -7,7 +7,6 @@ export default {
   data() {
     return {
       store,
-      currentGenre: "",
     };
   },
   components: {
@@ -21,13 +20,16 @@ export default {
 <template>
   <main>
     <div class="container">
+      <!-- componente per filtrare i risultati della ricerca in base al genere scelto -->
       <MainFilter />
       <section>
         <h2>Movies</h2>
+        <!-- componente contenitore per le card dei movie -->
         <MainMovies />
       </section>
       <section>
         <h2>TV Shows</h2>
+        <!-- componente contenitore per le card delle serie -->
         <MainSeries />
       </section>
     </div>

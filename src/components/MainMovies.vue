@@ -11,10 +11,13 @@ export default {
     };
   },
   computed: {
+    // computed per mostrare un messaggio quando il filtro dei generi non da risultati
     filterNoResults() {
+      // caso di default del select da gestire separatamente
       if (this.store.currentGenre === "") {
         return false;
       }
+      // gestione casi diversi dal default
       let checkFilter = true;
       this.store.movies.forEach((movie) => {
         if (movie.genre_ids.includes(this.store.currentGenre)) {
@@ -29,8 +32,9 @@ export default {
 
 <template>
   <div class="movies flex">
+    <!-- componente card su cui cicliamo e a cui passiamo props per popolarla -->
     <MainCard
-      v-for="movie in store.movies"
+      v-for="(movie, index) in store.movies"
       :title="movie.title"
       :titleOriginal="movie.original_title"
       :lang="movie.original_language"
@@ -42,6 +46,7 @@ export default {
       isWhat="movie"
     />
   </div>
+  <!-- paragrafo nel caso non si abbiano risultati dalla ricerca o dall'inserimento di un filtro per genere -->
   <p v-show="store.movies.length < 1 || filterNoResults">
     No results found in movies
   </p>

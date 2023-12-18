@@ -13,6 +13,7 @@ export default {
 <template>
   <div class="search-container flex">
     <label for="search" class="hidden">Barra di ricerca</label>
+    <!-- barra di ricerca, il cui value è legato ad una variabile dello store, che fa un emit per triggerare la chiamata della ricerca dei film o serie -->
     <input
       type="text"
       v-model="store.searchTxt"
@@ -20,6 +21,7 @@ export default {
       placeholder="Search Movies, TV Shows ..."
       @keyup.enter="$emit('search2')"
     />
+    <!-- button che fa un emit per triggerare la chiamata della ricerca dei film o serie -->
     <button @click="$emit('search')" id="search-btn">Search</button>
   </div>
 </template>
