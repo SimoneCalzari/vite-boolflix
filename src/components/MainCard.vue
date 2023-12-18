@@ -6,13 +6,13 @@ export default {
     return {
       pathPartOne: "https://image.tmdb.org/t/p/w342",
       contentVisible: false,
+      checkloop: true,
       // array per ottenere i nomi dei generi
       cardGenres: [],
       castActors: [],
       store,
     };
   },
-  created() {},
   props: {
     title: String,
     titleOriginal: String,
@@ -41,6 +41,8 @@ export default {
       return this.cardGenres.join(", ");
     },
     getCast() {
+      // console.log("ciao prima");
+      // if (this.checkloop) {
       // decido se avere come query movie o tv a seconda di cosa rappresenterà la mia card
       let queryMovieSerie = "movie";
       if (this.isWhat !== "movie") {
@@ -56,7 +58,12 @@ export default {
       axios.get(urlCast).then((response) => {
         // salvo la risposta dell api in una proprietà del mio componente
         this.castActors = response.data.cast;
+        console.log("ciao risposta");
       });
+      // }
+      // console.log("ciao dopo");
+
+      // this.checkloop = !this.checkloop;
       // inizializzo un array vuoto dove salverò solo i nomi degli attori
       const actorNames = [];
       this.castActors.forEach((actor) => {
@@ -69,7 +76,6 @@ export default {
       // restituisco i nomi degli attori come stringa separati da una virgola e spazio
       return actorNames.join(", ");
     },
-
     countStars() {
       return Math.ceil(this.vote / 2);
     },
@@ -83,6 +89,7 @@ export default {
       if (this.lang === "ko") {
         return "kr";
       }
+
       return this.lang;
     },
   },
