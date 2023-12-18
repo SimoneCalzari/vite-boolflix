@@ -33,8 +33,10 @@ export default {
       if (searchInput.trim().length > 0) {
         this.callApi(urlMovies, "movies", "results");
         this.callApi(urlSeries, "series", "results");
+        this.store.trick = !this.store.trick;
       }
       this.store.searchTxt = "";
+      this.store.currentGenre = "";
     },
   },
 };

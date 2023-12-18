@@ -7,8 +7,10 @@ export default {
       pathPartOne: "https://image.tmdb.org/t/p/w342",
       contentVisible: false,
       checkloop: true,
+      trick: "",
       // array per ottenere i nomi dei generi
       cardGenres: [],
+      cardGenresId: [],
       castActors: [],
       store,
     };
@@ -33,48 +35,50 @@ export default {
   computed: {
     getGenres() {
       this.cardGenres = [];
+      this.cardGenresId = [];
       this.store.genres.forEach((genreObj) => {
         if (this.genresList.includes(genreObj.id)) {
           this.cardGenres.push(genreObj.name);
+          this.cardGenresId.push(genreObj.id);
         }
       });
       return this.cardGenres.join(", ");
     },
     getCast() {
-      // console.log("ciao prima");
-      // if (this.checkloop) {
-      // decido se avere come query movie o tv a seconda di cosa rappresenterà la mia card
-      let queryMovieSerie = "movie";
-      if (this.isWhat !== "movie") {
-        queryMovieSerie = "tv";
-      }
-      // compo l url per la chiamta api
-      const urlCast =
-        this.store.urlBasic +
-        `/${queryMovieSerie}/` +
-        `${this.identifier}/` +
-        "credits?api_key=" +
-        this.store.apiKey;
-      axios.get(urlCast).then((response) => {
-        // salvo la risposta dell api in una proprietà del mio componente
-        this.castActors = response.data.cast;
-        console.log("ciao risposta");
-      });
-      // }
-      // console.log("ciao dopo");
+      this.trick = this.store.trick;
+      if (this.checkloop) {
+        // decido se avere come query movie o tv a seconda di cosa rappresenterà la mia card
+        let queryMovieSerie = "movie";
+        if (this.isWhat !== "movie") {
+          queryMovieSerie = "tv";
+        }
+        // compo l url per la chiamta api
+        const urlCast =
+          this.store.urlBasic +
+          `/${queryMovieSerie}/` +
+          `${this.identifier}/` +
+          "credits?api_key=" +
+          this.store.apiKey;
+        axios.get(urlCast).then((response) => {
+          // salvo la risposta dell api in una proprietà del mio componente
+          this.castActors = response.data.cast;
+          this.checkloop = false;
+        });
+      } else {
+        this.checkloop = true;
+        // inizializzo un array vuoto dove salverò solo i nomi degli attori
+        const actorNames = [];
+        this.castActors.forEach((actor) => {
+          actorNames.push(actor.name);
+        });
 
-      // this.checkloop = !this.checkloop;
-      // inizializzo un array vuoto dove salverò solo i nomi degli attori
-      const actorNames = [];
-      this.castActors.forEach((actor) => {
-        actorNames.push(actor.name);
-      });
-      // se ho più di 5 attori vorrò solo primi 5
-      if (actorNames.length > 5) {
-        actorNames.splice(5);
+        // se ho più di 5 attori vorrò solo primi 5
+        if (actorNames.length > 5) {
+          actorNames.splice(5);
+        }
+        // restituisco i nomi degli attori come stringa separati da una virgola e spazio
+        return actorNames.join(", ");
       }
-      // restituisco i nomi degli attori come stringa separati da una virgola e spazio
-      return actorNames.join(", ");
     },
     countStars() {
       return Math.ceil(this.vote / 2);
@@ -97,7 +101,13 @@ export default {
 </script>
 
 <template>
-  <article @mouseenter="showContent" @mouseleave="showContent">
+  <article
+    @mouseenter="showContent"
+    @mouseleave="showContent"
+    v-show="
+      cardGenresId.includes(store.currentGenre) || store.currentGenre === ''
+    "
+  >
     <div class="img-box" :class="{ none: contentVisible }">
       <img :src="pathPartOne + imgPath" alt="Image Not Available" />
     </div>

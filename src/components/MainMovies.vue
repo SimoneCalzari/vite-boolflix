@@ -10,6 +10,20 @@ export default {
       store,
     };
   },
+  computed: {
+    filterNoResults() {
+      if (this.store.currentGenre === "") {
+        return false;
+      }
+      let checkFilter = true;
+      this.store.movies.forEach((movie) => {
+        if (movie.genre_ids.includes(this.store.currentGenre)) {
+          checkFilter = false;
+        }
+      });
+      return checkFilter;
+    },
+  },
 };
 </script>
 
@@ -28,7 +42,9 @@ export default {
       isWhat="movie"
     />
   </div>
-  <p v-show="store.movies.length < 1">No results found in movies</p>
+  <p v-show="store.movies.length < 1 || filterNoResults">
+    No results found in movies
+  </p>
 </template>
 
 <style scoped lang="scss">

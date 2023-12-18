@@ -1,10 +1,19 @@
 <script>
 import MainMovies from "./MainMovies.vue";
 import MainSeries from "./MainSeries.vue";
+import MainFilter from "./MainFilter.vue";
+import { store } from "../store.js";
 export default {
+  data() {
+    return {
+      store,
+      currentGenre: "",
+    };
+  },
   components: {
     MainMovies,
     MainSeries,
+    MainFilter,
   },
 };
 </script>
@@ -12,6 +21,7 @@ export default {
 <template>
   <main>
     <div class="container">
+      <MainFilter />
       <section>
         <h2>Movies</h2>
         <MainMovies />
