@@ -1,5 +1,14 @@
 # BoolFlix
 
+## Step per provare il progetto
+
+Da terminale lanciare i seguenti comandi:
+
+```
+npm install
+npm run dev
+```
+
 ## Descrizione
 
 In questo progetto viene replicato un sito per la visione di film e serie TV, che vengono mostrati sotto forma di card con un immagine e passando col mouse sopra una di queste vengono mostrate ulteriori informazioni.
